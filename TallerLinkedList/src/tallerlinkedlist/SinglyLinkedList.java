@@ -31,5 +31,26 @@ public class SinglyLinkedList <E> {
     private int size = 0;
     public SinglyLinkedList(){};
     
+    public int size(){
+        return size;
+    }
+    
+    public boolean isEmpty(){
+        return size==0;
+    }
+    
+    public E removeFirst(){
+        if(isEmpty()){
+            return null;
+        }
+        E answer = head.getElement();
+        head = head.getNext();
+        size--;
+        if(size==0){
+            tail = null;
+        }
+        return answer;
+                
+    }
     
 }
