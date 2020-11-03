@@ -52,5 +52,44 @@ public class SinglyLinkedList <E> {
         return answer;
                 
     }
-    
+    public int find(E element){
+        Node n =head;
+        if (n==null)return -1;
+        int pos=0;
+        while (n.getNext()!=null){
+            if (n.getElement().equals(element))return pos;
+            pos ++;
+            n=n.getNext();
+        }
+        return -1;
+    }
+    public boolean contains (E element){
+        return find(element)!=-1;
+    }
+    public E removeLast(){
+        if(size==0)return null;
+        if (size==1) {
+            E temp= tail.getElement();
+            head= tail=null;
+            size--;
+            return temp;
+        }
+        Node <E> newtail= getPreviusNode(tail);
+        E temp = tail.getElement();
+        tail=newtail;
+        size --;
+        return temp;
+    }
+    private Node<E> getPreviusNode(Node<E> node){
+        if (size<2)return null;
+        Node<E> n0=head;
+        Node <E> n1=head.getNext();
+        while (n1.getNext()!=null){
+            n0=n1;
+            n1=n1.getNext();
+            if (node.equals(n1))return n0;
+        }
+        return null;
+       
+    }
 }
