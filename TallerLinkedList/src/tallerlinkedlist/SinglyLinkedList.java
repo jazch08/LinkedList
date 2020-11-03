@@ -52,7 +52,8 @@ public class SinglyLinkedList <E> {
         return answer;
                 
     }
-    public int find(E element){
+    
+    public int find(E element){ //index
         Node n =head;
         if (n==null)return -1;
         int pos=0;
@@ -63,9 +64,11 @@ public class SinglyLinkedList <E> {
         }
         return -1;
     }
+    
     public boolean contains (E element){
         return find(element)!=-1;
     }
+    
     public E removeLast(){
         if(size==0)return null;
         if (size==1) {
@@ -80,6 +83,7 @@ public class SinglyLinkedList <E> {
         size --;
         return temp;
     }
+    
     private Node<E> getPreviusNode(Node<E> node){
         if (size<2)return null;
         Node<E> n0=head;
@@ -90,6 +94,59 @@ public class SinglyLinkedList <E> {
             if (node.equals(n1))return n0;
         }
         return null;
-       
+    }
+    
+    public E remove(int i){
+        if(isEmpty()){
+            return null;
+        }
+        else if(i>size){
+            return null;
+        }
+        else if(i == size-1){
+            removeLast();
+        }
+        else if(i == 0){
+            removeFirst();
+        }
+        int pos = 0;
+        for(Node<E> e = tail ; tail.getNext() != null ; e = e.getNext()){
+            if(pos == i-1){
+                Node<E> temp = e.getNext().getNext();
+                e.setNext(temp);
+                size--;
+                return e.getNext().getElement();
+            }
+            pos++;
+        }
+        return null;
+    }
+    
+    public boolean add(int index, E element){
+        if(isEmpty()){
+            return false;
+        }
+        else if(index > size){
+            return false;
+        }
+        else if(index == size-1){
+            //addLast();
+            return true;
+        }
+        else if(index == 0){
+            //addFirst();
+            return true;
+        }
+        int pos = 0;
+        for(Node<E> e = tail ; tail.getNext() != null ; e = e.getNext()){
+            if(pos == index-1){
+                Node<E> temp = e.getNext();
+                Node<E> newNode = new Node(element, temp);
+                e.setNext(newNode);
+                return true;
+            }
+            pos++;
+        }
+        return false;
     }
 }
