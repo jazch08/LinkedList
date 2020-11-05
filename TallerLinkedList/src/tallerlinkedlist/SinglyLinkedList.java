@@ -24,6 +24,13 @@ public class SinglyLinkedList<E> {
         public void setNext(Node<E> n) {
             next = n;
         }
+
+        @Override
+        public String toString() {
+            return "Node{" + "element=" + element + ", next=" + next + '}';
+        }
+        
+        
     }
     //Fin clase Node
 
@@ -97,7 +104,7 @@ public class SinglyLinkedList<E> {
         if (size == 0) {
             return null;
         }
-        if (size == 1) {
+        if(size == 1) {
             E temp = tail.getElement();
             head = tail = null;
             size--;
@@ -131,9 +138,9 @@ public class SinglyLinkedList<E> {
         if (i > size || i < 0) {
             return null;
         } else if (i == size - 1) {
-            removeLast();
+            return removeLast();
         } else if (i == 0) {
-            removeFirst();
+            return removeFirst();
         }
         int pos = 0;
         for (Node<E> e = head; e.getNext() != null; e = e.getNext()) {
@@ -152,15 +159,16 @@ public class SinglyLinkedList<E> {
         if (index > size || index < 0) {
             return false;
         } else if (index == size) {
-            //addLast();
+            addLast(element);
             return true;
         } else if (index == 0) {
-            //addFirst();
+            addFirst(element);
             return true;
         }
         int pos = 0;
         for (Node<E> e = head; e.getNext() != null; e = e.getNext()) {
             if (pos == index - 1) {
+                size++;
                 Node<E> temp = e.getNext();
                 Node<E> newNode = new Node(element, temp);
                 e.setNext(newNode);
@@ -177,17 +185,22 @@ public class SinglyLinkedList<E> {
             head=newest;
         }else{
             tail.setNext(newest); 
-        tail=newest;
-        size++;  
+            tail=newest;
+            size++;  
         }
     }
     
     public void addFirst(E element){
-        head=new Node<>(element,head);  
+        head=new Node<>(element,head);
         if(size==0){
-            tail=head; 
-            size++;     
+            tail=head;
         }
+        size++;
+    }
+
+    @Override
+    public String toString() {
+        return "SinglyLinkedList{" + "head=" + head + ", tail=" + tail + ", size=" + size + '}';
     }
     
     
