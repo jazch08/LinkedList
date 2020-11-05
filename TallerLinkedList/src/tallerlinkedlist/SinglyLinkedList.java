@@ -106,6 +106,7 @@ public class SinglyLinkedList<E> {
         Node<E> newtail = getPreviusNode(tail);
         E temp = tail.getElement();
         tail = newtail;
+        tail.setNext(null);
         size--;
         return temp;
     }
