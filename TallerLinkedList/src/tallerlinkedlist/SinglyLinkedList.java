@@ -1,5 +1,7 @@
 package tallerlinkedlist;
 
+import java.util.Objects;
+
 public class SinglyLinkedList<E> {
 
     //Clase Node
@@ -23,6 +25,28 @@ public class SinglyLinkedList<E> {
 
         public void setNext(Node<E> n) {
             next = n;
+        }
+
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj) {
+                return true;
+            }
+            if (obj == null) {
+                return false;
+            }
+            if (getClass() != obj.getClass()) {
+                return false;
+            }
+            final Node<?> other = (Node<?>) obj;
+            if (!Objects.equals(this.element, other.element)) {
+                return false;
+            }
+            if (!Objects.equals(this.next, other.next)) {
+                return false;
+            }
+            return true;
         }
 
         @Override
@@ -110,27 +134,27 @@ public class SinglyLinkedList<E> {
             size--;
             return temp;
         }
-        Node<E> newtail = getPreviusNode(tail);
+        Node<E> newtail = getPreviusNode(tail);//obtener el penultimo elemento
         E temp = tail.getElement();
+        System.out.println(newtail+"returned");
         tail = newtail;
         tail.setNext(null);
         size--;
         return temp;
     }
+    
 
     private Node<E> getPreviusNode(Node<E> node) {
         if (size < 2) {
             return null;
         }
-        Node<E> n0 = head;
-        Node<E> n1 = head.getNext();
-        while (n1.getNext() != null) {
-            n0 = n1;
-            n1 = n1.getNext();
-            if (node.equals(n1)) {
-                return n0;
-            }
+        Node<E> current = head;
+        while (current.getNext()!=null){
+            if (current.getNext()==node)
+                return current;
+            current=current.getNext();
         }
+       
         return null;
     }
 
