@@ -168,5 +168,27 @@ public class SinglyLinkedList<E> {
             pos++;
         }
         return false;
+    }  
+    
+    public void addLast(E element){   
+        Node<E> newest= new Node<>(element,null);  
+        if(isEmpty()){
+            head=newest;
+        }else{
+            tail.setNext(newest); 
+        tail=newest;
+        size++;  
+        }
     }
+    
+    public void addFirst(E element){
+        head=new Node<>(element,head);  
+        if(size==0){
+            tail=head; 
+            size++;     
+        }
+    }
+    
+    
+    
 }
