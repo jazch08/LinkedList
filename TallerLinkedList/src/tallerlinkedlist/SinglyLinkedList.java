@@ -127,9 +127,7 @@ public class SinglyLinkedList<E> {
     }
 
     public E remove(int i) {
-        if (isEmpty()) {
-            return null;
-        } else if (i > size) {
+        if (i > size || i < 0) {
             return null;
         } else if (i == size - 1) {
             removeLast();
@@ -137,7 +135,7 @@ public class SinglyLinkedList<E> {
             removeFirst();
         }
         int pos = 0;
-        for (Node<E> e = tail; tail.getNext() != null; e = e.getNext()) {
+        for (Node<E> e = head; e.getNext() != null; e = e.getNext()) {
             if (pos == i - 1) {
                 Node<E> temp = e.getNext().getNext();
                 e.setNext(temp);
@@ -150,11 +148,9 @@ public class SinglyLinkedList<E> {
     }
 
     public boolean add(int index, E element) {
-        if (isEmpty()) {
+        if (index > size || index < 0) {
             return false;
-        } else if (index > size) {
-            return false;
-        } else if (index == size - 1) {
+        } else if (index == size) {
             //addLast();
             return true;
         } else if (index == 0) {
@@ -162,7 +158,7 @@ public class SinglyLinkedList<E> {
             return true;
         }
         int pos = 0;
-        for (Node<E> e = tail; tail.getNext() != null; e = e.getNext()) {
+        for (Node<E> e = head; e.getNext() != null; e = e.getNext()) {
             if (pos == index - 1) {
                 Node<E> temp = e.getNext();
                 Node<E> newNode = new Node(element, temp);
